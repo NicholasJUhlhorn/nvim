@@ -129,7 +129,9 @@ vim.keymap.set('n', '<leader>fs', '<cmd>Telescope current_buffer_fuzzy_find<cr>'
 require('telescope').load_extension('fzf')
 
 require('toggleterm').setup({
-    open_mapping = true,
+    open_mapping = '<C-g>',
+    direction = 'horizontal',
+    shade_termials = true,
 })
 
 require('nvim-tree').setup({
