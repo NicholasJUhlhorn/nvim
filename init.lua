@@ -35,12 +35,15 @@ lazy.opts = {}
 
 lazy.setup({
     {'akinsho/bufferline.nvim'},
+    {'windwp/nvim-autopairs'},
     {'numToStr/Comment.nvim'},
+    {'hrsh7th/nvim-cmp'},
     {'tpope/vim-fugitive'},
     {'lewis6991/gitsigns.nvim'},
     {'lukas-reineke/indent-blankline.nvim'},
     {'rebelot/kanagawa.nvim'},
     {'nvim-lualine/lualine.nvim'},
+    {'neovim/nvim-lspconfig'},
     {'kyazdani42/nvim-web-devicons'},
     {'nvim-lua/plenary.nvim'},
     {'nvim-telescope/telescope.nvim'},
@@ -53,6 +56,8 @@ lazy.setup({
 
     -- Gleam Lang
     {'gleam-lang/gleam.vim'},
+    -- Rust Lang
+    {'simrat39/rust-tools.nvim'},
 })
 
 -- vim.opt._ settings file
@@ -60,6 +65,10 @@ require('options')
 -- vim keybinds file
 require('keybindings')
 
+require('nvim-autopairs').setup({
+    event = 'InsertEnter',
+    config = true,
+})
 
 require('bufferline').setup({
     options = {
@@ -156,6 +165,8 @@ require('nvim-treesitter.configs').setup({
         enabled = true,
     },
 })
+
+require('rust-tools').setup({})
 
 vim.opt.termguicolors = true
 vim.cmd.colorscheme('kanagawa')
