@@ -37,7 +37,14 @@ lazy.setup({
     {'akinsho/bufferline.nvim'},
     {'windwp/nvim-autopairs'},
     {'numToStr/Comment.nvim'},
+
+    {'hrsh7th/cmp-nvim-lsp'},
+    {'hrsh7th/cmp-buffer'},
+    {'hrsh7th/cmp-path'},
+    {'hrsh7th/cmp-cmdline'}, 
     {'hrsh7th/nvim-cmp'},
+    {'hrsh7th/cmp-emoji'},
+
     {'tpope/vim-fugitive'},
     {'lewis6991/gitsigns.nvim'},
     {'lukas-reineke/indent-blankline.nvim'},
@@ -51,6 +58,8 @@ lazy.setup({
     {'akinsho/toggleterm.nvim'},
     {'kyazdani42/nvim-tree.lua'},
     {'nvim-treesitter/nvim-treesitter'},
+    {'L3MON4D3/LuaSnip'},
+    {'saadparwaiz1/cmp_luasnip'},
     {'tpope/vim-surround'},
     {'tpope/vim-repeat'},
 
@@ -58,6 +67,7 @@ lazy.setup({
     {'gleam-lang/gleam.vim'},
     -- Rust Lang
     {'simrat39/rust-tools.nvim'},
+    {'rust-lang/rust.vim'},
 })
 
 -- vim.opt._ settings file
@@ -93,6 +103,54 @@ require('bufferline').setup({
 
 require('Comment').setup({})
 
+local cmp = require('cmp')
+cmp.setup({
+    snippet = {
+	    expand = function(args) 
+		require('luasnip').lsp_expand(args.body)
+	    end,
+    },
+    window = {
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
+    },
+    mapping = cmp.mapping.preset.insert({
+        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-f>'] = cmp.mapping.scroll_docs(4),
+        ['<C-Space>'] = cmp.mapping.complete(),
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    }), 
+	sources = cmp.config.sources(
+	{
+		{ name = 'nvim_lsp' },
+		{ name = 'luasnip' }, -- For luasnip users.
+	}, 
+	{
+		{ name = 'buffer' },
+	}),
+    opts = function(_, opts)
+        table.insert(opts.sources, {name = 'emoji'})
+    end,
+})
+cmp.setup.cmdline('/', {
+ mapping = cmp.mapping.preset.cmdline(),
+ sources = {
+   { name = 'buffer' }
+ }
+})
+cmp.setup.cmdline(':', {
+ mapping = cmp.mapping.preset.cmdline(),
+ sources = cmp.config.sources({
+   { name = 'path' }
+  }, {
+   { name = 'cmdline' }
+ })
+})
+-- local capabilities = require('cmp_nvim_lsp').default_capabilities()
+--    require('lspconfig')[''].setup {
+--    capabilities = capabilities
+-- }
+
 require('ibl').setup({
     enabled = true,
     indent = {
@@ -109,6 +167,8 @@ require('gitsigns').setup({
     changedelete = {text = '▎'},
   }
 })
+
+require('lspconfig')
 
 require('lualine').setup({
     options = {
@@ -166,7 +226,40 @@ require('nvim-treesitter.configs').setup({
     },
 })
 
-require('rust-tools').setup({})
+require('rust-tools').setup({
+    server = {
+        on_attach = require'cmp'.on_attach,
+        settings = {
+            ['rust-analyzer'] = {
+                assist = {
+                    importMergeBehavoir = 'last',
+                    importPrefix = 'by_self',
+                },
+                cargo = {
+                    loadOutDirsFromCheck = true,
+                },
+                procMacro = {
+                    enable = true,
+                },
+            }
+        }
+    },
+    tools = {
+        autoSetHints = true,
+        hover_with_actions = true,
+        runnables = {
+            use_telescope = true,
+        },
+        inlay_hints = {
+            show_parameter_hints = true,
+            parameter_hints_prefix = '<-',
+            other_hints_prefix = '=>',
+        },
+        hover_actions = {
+            border = 'single',
+        },
+    },
+})
 
 vim.opt.termguicolors = true
 vim.cmd.colorscheme('kanagawa')
