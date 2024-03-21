@@ -146,10 +146,6 @@ cmp.setup.cmdline(':', {
    { name = 'cmdline' }
  })
 })
--- local capabilities = require('cmp_nvim_lsp').default_capabilities()
---    require('lspconfig')[''].setup {
---    capabilities = capabilities
--- }
 
 require('ibl').setup({
     enabled = true,
