@@ -125,11 +125,12 @@ cmp.setup({
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
     }), 
 	sources = {
-		{ name = 'nvim_lsp' },
-		{ name = 'luasnip' }, -- For luasnip users.
 		{ name = 'buffer' },
-        { name = 'rust-analyzer' },
         { name = 'clangd' },
+        { name = 'crates'}
+        { name = 'luasnip' }, -- For luasnip users.
+        { name = 'nvim_lsp' },
+        { name = 'rust-analyzer' },
 	},
     opts = function(_, opts)
         table.insert(opts.sources, {name = 'emoji'})
