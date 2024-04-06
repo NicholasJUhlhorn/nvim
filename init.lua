@@ -44,13 +44,14 @@ lazy.setup({
     {'hrsh7th/cmp-cmdline'}, 
     {'hrsh7th/nvim-cmp'},
     {'hrsh7th/cmp-emoji'},
+    {'neovim/nvim-lspconfig'},
 
     {'tpope/vim-fugitive'},
     {'lewis6991/gitsigns.nvim'},
     {'lukas-reineke/indent-blankline.nvim'},
     {'rebelot/kanagawa.nvim'},
+    {'https://git.sr.ht/~whynothugo/lsp_lines.nvim'},
     {'nvim-lualine/lualine.nvim'},
-    {'neovim/nvim-lspconfig'},
     {'kyazdani42/nvim-web-devicons'},
     {'nvim-lua/plenary.nvim'},
     {'nvim-telescope/telescope.nvim'},
@@ -68,6 +69,9 @@ lazy.setup({
     -- Rust Lang
     {'simrat39/rust-tools.nvim'},
     {'rust-lang/rust.vim'},
+    {'saecki/crates.nvim'},
+    -- C Lang
+    {'neoclide/coc.nvim', branch = 'release'},
 })
 
 -- vim.opt._ settings file
@@ -120,14 +124,13 @@ cmp.setup({
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<CR>'] = cmp.mapping.confirm({ select = true }),
     }), 
-	sources = cmp.config.sources(
-	{
+	sources = {
 		{ name = 'nvim_lsp' },
 		{ name = 'luasnip' }, -- For luasnip users.
-	}, 
-	{
 		{ name = 'buffer' },
-	}),
+        { name = 'rust-analyzer' },
+        { name = 'clangd' },
+	},
     opts = function(_, opts)
         table.insert(opts.sources, {name = 'emoji'})
     end,
@@ -164,7 +167,18 @@ require('gitsigns').setup({
   }
 })
 
-require('lspconfig')
+-- require('cmp-nvim-lsp')
+-- local capabilites = require('cmp-nvim-lsp').update_capabilites(vim.lsp.protocal.make_client_capabilites())
+local lspconfig = require('lspconfig')
+lspconfig.rust_analyzer.setup({
+    -- capabilites = capabilites,
+    -- on_attach = require'cmp'.on_attach,
+})
+lspconfig.clangd.setup({
+    -- capabilites = capabilites,
+})
+
+require('lsp_lines').setup()
 
 require('lualine').setup({
     options = {
@@ -241,21 +255,22 @@ require('rust-tools').setup({
         }
     },
     tools = {
+        executor = require('rust-tools.executors').termopen,
         autoSetHints = true,
-        hover_with_actions = true,
         runnables = {
             use_telescope = true,
         },
         inlay_hints = {
+            auto = true,
             show_parameter_hints = true,
             parameter_hints_prefix = '<-',
             other_hints_prefix = '=>',
         },
-        hover_actions = {
-            border = 'single',
-        },
+        reload_workspace_from_cargo_toml = true,
     },
 })
+
+require('crates').setup()
 
 vim.opt.termguicolors = true
 vim.cmd.colorscheme('kanagawa')
