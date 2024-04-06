@@ -127,7 +127,7 @@ cmp.setup({
 	sources = {
 		{ name = 'buffer' },
         { name = 'clangd' },
-        { name = 'crates'}
+        { name = 'crates'},
         { name = 'luasnip' }, -- For luasnip users.
         { name = 'nvim_lsp' },
         { name = 'rust-analyzer' },
