@@ -126,6 +126,7 @@ cmp.setup({
     }), 
 	sources = {
 		{ name = 'buffer' },
+        { name = 'ccls'},
         { name = 'clangd' },
         { name = 'crates'},
         { name = 'luasnip' }, -- For luasnip users.
@@ -171,13 +172,9 @@ require('gitsigns').setup({
 -- require('cmp-nvim-lsp')
 -- local capabilites = require('cmp-nvim-lsp').update_capabilites(vim.lsp.protocal.make_client_capabilites())
 local lspconfig = require('lspconfig')
-lspconfig.rust_analyzer.setup({
-    -- capabilites = capabilites,
-    -- on_attach = require'cmp'.on_attach,
-})
-lspconfig.clangd.setup({
-    -- capabilites = capabilites,
-})
+lspconfig.ccls.setup({})
+lspconfig.clangd.setup({})
+lspconfig.rust_analyzer.setup({})
 
 require('lsp_lines').setup()
 
