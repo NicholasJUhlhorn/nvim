@@ -10,7 +10,7 @@ vim.keymap.set('n', '<C-j>', ':bprev<CR>')
 vim.keymap.set('n', '<C-k>', ':bnext<CR>')
 
 -- LEADER-H, add header to top of file.
-vim.keymap.set('n', '<leader>H', 'O <bar> <cmd>lua header()<cr>') 
+vim.keymap.set('n', '<leader>H', 'O <bar> <cmd>lua header()<cr><ESC>') 
 
 function header()
     local pos = vim.api.nvim_win_get_cursor(0)
