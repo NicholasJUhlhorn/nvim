@@ -1,3 +1,6 @@
+-- Nicholas J Uhlhorn
+-- April 2024
+
 local lazy = {}
 
 function lazy.install(path)
@@ -50,6 +53,7 @@ lazy.setup({
     {'lewis6991/gitsigns.nvim'},
     {'lukas-reineke/indent-blankline.nvim'},
     {'rebelot/kanagawa.nvim'},
+    -- Want to expand instead
     {'https://git.sr.ht/~whynothugo/lsp_lines.nvim'},
     {'nvim-lualine/lualine.nvim'},
     {'kyazdani42/nvim-web-devicons'},
@@ -111,7 +115,7 @@ local cmp = require('cmp')
 cmp.setup({
     snippet = {
 	    expand = function(args) 
-		require('luasnip').lsp_expand(args.body)
+            require('luasnip').lsp_expand(args.body)
 	    end,
     },
     window = {
@@ -176,7 +180,7 @@ lspconfig.ccls.setup({})
 lspconfig.clangd.setup({})
 lspconfig.rust_analyzer.setup({})
 
-require('lsp_lines').setup()
+-- require('lsp_lines').setup()
 
 require('lualine').setup({
     options = {
@@ -213,6 +217,7 @@ require('toggleterm').setup({
 
 require('nvim-tree').setup({
   hijack_cursor = false,
+  auto_close = true,
   on_attach = function(bufnr)
     local bufmap = function(lhs, rhs, desc)
       vim.keymap.set('n', lhs, rhs, {buffer = bufnr, desc = desc})
@@ -229,8 +234,16 @@ require('nvim-tree').setup({
 vim.keymap.set('n', '<leader>e', '<cmd>NvimTreeToggle<cr>')
 
 require('nvim-treesitter.configs').setup({
-    highlite = {
+    highlight = {
         enabled = true,
+    },
+    indent = {
+        enable = true,
+        disable = {
+            'python',
+            'css',
+            'rust',
+        },
     },
 })
 
