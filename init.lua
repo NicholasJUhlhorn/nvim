@@ -36,18 +36,13 @@ lazy.opts = {}
 -- TODO: plugins to checkout:
 		-- wellle/targets.vim
 
+-- plugins folder
+-- require('lazy').setup('plugins')
+
 lazy.setup({
     {'akinsho/bufferline.nvim'},
     {'windwp/nvim-autopairs'},
     {'numToStr/Comment.nvim'},
-
-    {'hrsh7th/cmp-nvim-lsp'},
-    {'hrsh7th/cmp-buffer'},
-    {'hrsh7th/cmp-path'},
-    {'hrsh7th/cmp-cmdline'}, 
-    {'hrsh7th/nvim-cmp'},
-    {'hrsh7th/cmp-emoji'},
-    {'neovim/nvim-lspconfig'},
 
     {'tpope/vim-fugitive'},
     {'lewis6991/gitsigns.nvim'},
@@ -55,7 +50,6 @@ lazy.setup({
     {'rebelot/kanagawa.nvim'},
     -- Want to expand instead
     {'https://git.sr.ht/~whynothugo/lsp_lines.nvim'},
-    {'nvim-lualine/lualine.nvim'},
     {'kyazdani42/nvim-web-devicons'},
     {'nvim-lua/plenary.nvim'},
     {'nvim-telescope/telescope.nvim'},
@@ -63,7 +57,6 @@ lazy.setup({
     {'akinsho/toggleterm.nvim'},
     {'kyazdani42/nvim-tree.lua'},
     {'nvim-treesitter/nvim-treesitter'},
-    {'L3MON4D3/LuaSnip'},
     {'saadparwaiz1/cmp_luasnip'},
     {'tpope/vim-surround'},
     {'tpope/vim-repeat'},
@@ -111,50 +104,6 @@ require('bufferline').setup({
 
 require('Comment').setup({})
 
-local cmp = require('cmp')
-cmp.setup({
-    snippet = {
-	    expand = function(args) 
-            require('luasnip').lsp_expand(args.body)
-	    end,
-    },
-    window = {
-      completion = cmp.config.window.bordered(),
-      documentation = cmp.config.window.bordered(),
-    },
-    mapping = cmp.mapping.preset.insert({
-        ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-        ['<C-f>'] = cmp.mapping.scroll_docs(4),
-        ['<C-Space>'] = cmp.mapping.complete(),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
-    }), 
-	sources = {
-		{ name = 'buffer' },
-        { name = 'ccls'},
-        { name = 'clangd' },
-        { name = 'crates'},
-        { name = 'luasnip' }, -- For luasnip users.
-        { name = 'nvim_lsp' },
-        { name = 'rust-analyzer' },
-	},
-    opts = function(_, opts)
-        table.insert(opts.sources, {name = 'emoji'})
-    end,
-})
-cmp.setup.cmdline('/', {
- mapping = cmp.mapping.preset.cmdline(),
- sources = {
-   { name = 'buffer' }
- }
-})
-cmp.setup.cmdline(':', {
- mapping = cmp.mapping.preset.cmdline(),
- sources = cmp.config.sources({
-   { name = 'path' }
-  }, {
-   { name = 'cmdline' }
- })
-})
 
 require('ibl').setup({
     enabled = true,
@@ -173,25 +122,8 @@ require('gitsigns').setup({
   }
 })
 
--- require('cmp-nvim-lsp')
--- local capabilites = require('cmp-nvim-lsp').update_capabilites(vim.lsp.protocal.make_client_capabilites())
-local lspconfig = require('lspconfig')
-lspconfig.ccls.setup({})
-lspconfig.clangd.setup({})
-lspconfig.rust_analyzer.setup({})
 
 -- require('lsp_lines').setup()
-
-require('lualine').setup({
-    options = {
-        icons_enabled = true,
-        section_separators = '|',
-        component_separators = '',
-	disabled_filetypes = {
-		statusline = {'Nvimtree'},
-	}
-    }
-})
 
 require('telescope').setup({
    fzf = {
@@ -247,39 +179,39 @@ require('nvim-treesitter.configs').setup({
     },
 })
 
-require('rust-tools').setup({
-    server = {
-        on_attach = require'cmp'.on_attach,
-        settings = {
-            ['rust-analyzer'] = {
-                assist = {
-                    importMergeBehavoir = 'last',
-                    importPrefix = 'by_self',
-                },
-                cargo = {
-                    loadOutDirsFromCheck = true,
-                },
-                procMacro = {
-                    enable = true,
-                },
-            }
-        }
-    },
-    tools = {
-        executor = require('rust-tools.executors').termopen,
-        autoSetHints = true,
-        runnables = {
-            use_telescope = true,
-        },
-        inlay_hints = {
-            auto = true,
-            show_parameter_hints = true,
-            parameter_hints_prefix = '<-',
-            other_hints_prefix = '=>',
-        },
-        reload_workspace_from_cargo_toml = true,
-    },
-})
+-- require('rust-tools').setup({
+--     server = {
+--         on_attach = require'cmp'.on_attach,
+--         settings = {
+--             ['rust-analyzer'] = {
+--                 assist = {
+--                     importMergeBehavoir = 'last',
+--                     importPrefix = 'by_self',
+--                 },
+--                 cargo = {
+--                     loadOutDirsFromCheck = true,
+--                 },
+--                 procMacro = {
+--                     enable = true,
+--                 },
+--             }
+--         }
+--     },
+--     tools = {
+--         executor = require('rust-tools.executors').termopen,
+--         autoSetHints = true,
+--         runnables = {
+--             use_telescope = true,
+--         },
+--         inlay_hints = {
+--             auto = true,
+--             show_parameter_hints = true,
+--             parameter_hints_prefix = '<-',
+--             other_hints_prefix = '=>',
+--         },
+--         reload_workspace_from_cargo_toml = true,
+--     },
+-- })
 
 require('crates').setup()
 
