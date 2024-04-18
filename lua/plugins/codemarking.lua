@@ -20,19 +20,22 @@ return {
     {
         'lewis6991/gitsigns.nvim',
         config = function()
-            signs = {
-                add = {text = '▎'},
-                change = {text = '▎'},
-                delete = {text = '➤'},
-                topdelete = {text = '➤'},
-                changedelete = {text = '▎'},
-            }
+            require('gitsigns').setup({
+                signs = {
+                    add = {text = '▎'},
+                    change = {text = '▎'},
+                    delete = {text = '➤'},
+                    topdelete = {text = '➤'},
+                    changedelete = {text = '▎'},
+                }
+            })
         end,
     },
     {
         'nvim-treesitter/nvim-treesitter',
         config = function()
-            require('nvim-treesitter.configs').setup({
+            require('nvim-treesitter.configs').setup(
+                {
                 highlight = {
                     enabled = true,
                 },
@@ -44,8 +47,13 @@ return {
                         'rust',
                     },
                 },
+                ensure_installed = {},
+                modules = {},
+                auto_install = true,
+                ignore_install = {},
+                sync_install = true,
             })
-        end
+        end,
     },
     {
         'lukas-reineke/indent-blankline.nvim',
