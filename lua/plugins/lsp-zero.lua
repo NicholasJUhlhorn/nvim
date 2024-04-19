@@ -69,8 +69,12 @@ return {
             cmp.setup({
                 preselect = cmp.PreselectMode.None,
                 sources = {
-                    { name = 'nvim_lsp' },
+                    { name = 'buffer'},
+                    { name = 'clangd' },
+                    { name = 'crates' },
                     { name = 'luasnip' },
+                    { name = 'nvim_lsp' },
+                    { name = 'rust-analyzer' },
                 },
                 mapping = {
                     ['<CR>'] = cmp.mapping.confirm({ select = false }),
@@ -85,7 +89,7 @@ return {
                     end
                 }
             })
-            
+
             cmp.setup.cmdline('/', {
                mapping = cmp.mapping.preset.cmdline(),
                sources = {
