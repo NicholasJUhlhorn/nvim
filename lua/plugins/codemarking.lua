@@ -4,6 +4,7 @@
 return {
     {
         'nvim-lualine/lualine.nvim',
+        event = {'bufreadpre', 'bufnewfile'},
         config = function()
             require('lualine').setup({
                 options = {
@@ -19,6 +20,7 @@ return {
     },
     {
         'lewis6991/gitsigns.nvim',
+        event = {'bufreadpre', 'bufnewfile'},
         config = function()
             require('gitsigns').setup({
                 signs = {
@@ -33,6 +35,7 @@ return {
     },
     {
         'nvim-treesitter/nvim-treesitter',
+        event = {'bufreadpre', 'bufnewfile'},
         config = function()
             require('nvim-treesitter.configs').setup(
                 {
@@ -57,6 +60,7 @@ return {
     },
     {
         'lukas-reineke/indent-blankline.nvim',
+        event = {'bufreadpre', 'bufnewfile'},
         config = function()
             require('ibl').setup({
                 enabled = true,

@@ -4,7 +4,8 @@
 
 return {
     'ThePrimeagen/harpoon',
-    dependancies = {
+    event = 'VimEnter',
+    dependencies = {
         'nvim-lua/plenary.nvim',
         'nvim-telescope/telescope.nvim',
     },
@@ -62,7 +63,7 @@ return {
         -- end
 
 
-        vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
+        vim.keymap.set("n", "<leader>m", function() harpoon:list():add() end)
         -- vim.keymap.set("n", "<C-y>", function() toggle_telescope(harpoon:list()) end,
         --     { desc = "Open harpoon window" })
         vim.keymap.set("n", "<C-y>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
