@@ -2,6 +2,9 @@
 -- April 2024
 
 return {
-    {'tpope/vim-fugitive'},
+    {
+        'tpope/vim-fugitive',
+        event = 'VimEnter',
+    },
 }
 
