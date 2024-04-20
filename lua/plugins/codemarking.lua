@@ -35,7 +35,6 @@ return {
     },
     {
         'nvim-treesitter/nvim-treesitter',
-        event = {'bufreadpre', 'bufnewfile'},
         config = function()
             require('nvim-treesitter.configs').setup(
                 {
