@@ -53,12 +53,12 @@ return {
 
             require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
-            -- lsp.ensure_installed({
-            --     'pyright',
-            --     'lua_ls',
-            --     'gopls',
-            --     'clangd'
-            -- })
+            lsp.ensure_installed({
+                'pyright',
+                'lua_ls',
+                'gopls',
+                'clangd'
+            })
 
             lsp.setup()
 
@@ -75,6 +75,7 @@ return {
                     { name = 'crates' },
                     { name = 'luasnip' },
                     { name = 'nvim_lsp' },
+                    { name = 'pyright' },
                     { name = 'rust-analyzer' },
                 },
                 mapping = {
