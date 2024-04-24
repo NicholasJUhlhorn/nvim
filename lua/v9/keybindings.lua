@@ -27,3 +27,14 @@ function WriteHeader()
     vim.cmd(':normal gcc')
     vim.cmd('norm! j')
 end
+
+
+-- mapping so j and k move visually in text files :)
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+    pattern = {"*.txt", "*.md"},
+    command = "noremap <buffer> j gj",
+})
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+    pattern = {"*.txt", "*.md"},
+    command = "noremap <buffer> k gk",
+})
