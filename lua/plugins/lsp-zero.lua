@@ -54,10 +54,11 @@ return {
             require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
             lsp.ensure_installed({
-                'pyright',
+                'clangd',
+                -- 'gopls',
                 'lua_ls',
-                'gopls',
-                'clangd'
+                'pyright',
+                'rust_analyzer'
             })
 
             lsp.setup()
