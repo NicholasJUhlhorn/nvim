@@ -38,3 +38,9 @@ vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
     pattern = {"*.txt", "*.md"},
     command = "noremap <buffer> k gk",
 })
+
+-- propper auto commands
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+    pattern = {"*.hbs"},
+    command = "set filetype=html"
+})

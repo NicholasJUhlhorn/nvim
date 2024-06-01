@@ -58,6 +58,7 @@ return {
                 'pyright',
                 'lua_ls',
                 'tsserver',
+                'rust_analyzer'
             })
 
             lsp.setup()
