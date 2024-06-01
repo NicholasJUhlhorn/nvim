@@ -54,16 +54,16 @@ return {
             require('lspconfig').lua_ls.setup(lsp.nvim_lua_ls())
 
             lsp.ensure_installed({
+                'clangd',
                 'pyright',
                 'lua_ls',
-                'gopls',
-                'clangd'
+                'tsserver',
             })
 
             lsp.setup()
 
             local cmp = require('cmp')
-            -- local cmp_action = require('lsp-zero').cmp_action()
+            local cmp_action = require('lsp-zero').cmp_action()
 
             require('luasnip.loaders.from_vscode').lazy_load()
 
@@ -77,6 +77,7 @@ return {
                     { name = 'nvim_lsp' },
                     { name = 'pyright' },
                     { name = 'rust-analyzer' },
+                    { name = 'tsserver' }
                 },
                 mapping = {
                     ['<CR>'] = cmp.mapping.confirm({ select = false }),

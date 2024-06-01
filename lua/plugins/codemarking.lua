@@ -11,9 +11,9 @@ return {
                     icons_enabled = true,
                     section_separators = '|',
                     component_separators = '',
-                    disabled_filetypes = {
-                        statusline = {'Nvimtree'},
-                    },
+                    -- disabled_filetypes = {
+                    --     statusline = {'Nvimtree'},
+                    -- },
                 },
             })
         end,
@@ -35,21 +35,27 @@ return {
     },
     {
         'nvim-treesitter/nvim-treesitter',
+        lazy = false,
         config = function()
-            require('nvim-treesitter.configs').setup(
-                {
+            require('nvim-treesitter.configs').setup({
                 highlight = {
-                    enabled = true,
+                    enable = true,
+                    additional_vim_regex_highlighting = false,
                 },
                 indent = {
                     enable = true,
-                    disable = {
-                        'python',
-                        'css',
-                        'rust',
-                    },
+                    -- disable = {
+                    --     'python',
+                    --     'css',
+                    --     'rust',
+                    -- },
                 },
-                ensure_installed = {},
+                ensure_installed = {
+                    'c',
+                    'javascript',
+                    'python',
+                    'rust',
+                },
                 modules = {},
                 auto_install = true,
                 ignore_install = {},
