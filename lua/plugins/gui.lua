@@ -19,15 +19,16 @@ return {
                     buffer_selected = {
                         italic = false,
                     },
-                    indicator_selected = {
-                        fg = {attribute = 'fg', highlite = 'Funciton'},
-                        italic = false,
-                    },
+                    -- indicator_selected = {
+                    --     fg = {attribute = 'fg', highlite = 'true'},
+                    --     italic = false,
+                    -- },
                 }
             })
         end
     },
     {'rebelot/kanagawa.nvim'},
+    {'ellisonleao/gruvbox.nvim'},
     {'kyazdani42/nvim-web-devicons'},
     {
         'akinsho/toggleterm.nvim',
