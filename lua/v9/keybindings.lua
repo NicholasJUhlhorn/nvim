@@ -13,6 +13,9 @@ vim.keymap.set('n', '<C-b>', ':bdelete<CR>')
 -- LEADER-H, add header to top of file.
 vim.keymap.set('n', '<leader>H', 'O <bar> <cmd>lua WriteHeader()<cr><ESC>')
 
+-- Popup error window
+vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', {noremap=true, silent=true})
+
 function WriteHeader()
     local pos = vim.api.nvim_win_get_cursor(0)
     local name_string = "Nicholas J Uhlhorn"
