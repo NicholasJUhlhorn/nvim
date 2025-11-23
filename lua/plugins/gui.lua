@@ -28,6 +28,8 @@ return {
         end
     },
     {'rebelot/kanagawa.nvim'},
+    {'liuchengxu/space-vim-dark'},
+    {'sainnhe/gruvbox-material'},
     {'ellisonleao/gruvbox.nvim'},
     {'kyazdani42/nvim-web-devicons'},
     {
