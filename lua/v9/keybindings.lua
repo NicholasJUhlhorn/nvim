@@ -13,6 +13,9 @@ vim.keymap.set('n', '<C-b>', ':bdelete<CR>')
 -- LEADER-H, add header to top of file.
 vim.keymap.set('n', '<leader>H', 'O <bar> <cmd>lua WriteHeader()<cr><ESC>')
 
+-- LEADER-o, shorthand for :Oil
+vim.keymap.set('n', '<leader>o', '<cmd>Oil<cr><ESC>')
+
 -- Popup error window
 vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', {noremap=true, silent=true})
 
