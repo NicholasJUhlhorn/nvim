@@ -52,6 +52,7 @@ return {
                 },
                 ensure_installed = {
                     'c',
+                    'go',
                     'javascript',
                     'python',
                     'rust',

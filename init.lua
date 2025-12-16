@@ -6,4 +6,4 @@ require('v11.keybindings')
 require('v11.commands')
 require('v11.lazy')
 require('v11.colorscheme')
-
+require('v11.logos')
