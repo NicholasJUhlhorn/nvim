@@ -12,8 +12,9 @@ return {
                 'lua_ls',
                 'pyright',
                 'eslint',
+                'golangci-lint',
                 'gopls',
-                'rust_analyser'
+                'rust_analyzer'
             },
         },
     },
