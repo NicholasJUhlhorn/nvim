@@ -16,6 +16,9 @@ vim.keymap.set('n', '<leader>H', 'O <bar> <cmd>lua WriteHeader()<cr><ESC>')
 -- LEADER-o, shorthand for :Oil
 vim.keymap.set('n', '<leader>o', '<cmd>Oil<cr><ESC>')
 
+-- LEADER-nd, kill notification windows now!
+vim.keymap.set('n', '<leader>nd', "<cmd>NoiceDismiss<CR>")
+
 -- Popup error window
 vim.keymap.set('n', '<leader>e', '<cmd>lua vim.diagnostic.open_float()<CR>', {noremap=true, silent=true})
 
@@ -34,6 +37,14 @@ function WriteHeader()
     vim.cmd('norm! j')
 end
 
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client.server_capabilities.hoverProvider then
+            vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
+        end
+    end,
+})
 
 -- mapping so j and k move visually in text files :)
 vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
